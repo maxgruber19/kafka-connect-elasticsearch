@@ -21,6 +21,7 @@ import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.concurrent.TimeUnit;
@@ -820,38 +821,37 @@ public class ElasticsearchSinkConnectorConfig extends AbstractConfig {
     int order = 0;
     configDef
         .define(
-            DATA_STREAM_DATASET_CONFIG,
-            Type.STRING,
-            DATA_STREAM_DATASET_DEFAULT,
-            new DataStreamDatasetValidator(),
-            Importance.LOW,
-            DATA_STREAM_DATASET_DOC,
-            DATA_STREAM_GROUP,
-            ++order,
-            Width.MEDIUM,
-            DATA_STREAM_DATASET_DISPLAY
+          DATA_STREAM_DATASET_CONFIG,
+          Type.STRING,
+          DATA_STREAM_DATASET_DEFAULT,
+          new DataStreamDatasetValidator(),
+          Importance.LOW,
+          DATA_STREAM_DATASET_DOC,
+          DATA_STREAM_GROUP,
+          ++order,
+          Width.MEDIUM,
+          DATA_STREAM_DATASET_DISPLAY
         ).define(
-            DATA_STREAM_TYPE_CONFIG,
-            Type.STRING,
-            DATA_STREAM_TYPE_DEFAULT.name(),
-            new EnumRecommender<>(DataStreamType.class),
-            Importance.LOW,
-            DATA_STREAM_TYPE_DOC,
-            DATA_STREAM_GROUP,
-            ++order,
-            Width.SHORT,
-            DATA_STREAM_TYPE_DISPLAY,
-            new EnumRecommender<>(DataStreamType.class)
+          DATA_STREAM_TYPE_CONFIG,
+          Type.STRING,
+          DATA_STREAM_TYPE_DEFAULT.name(),
+          Importance.LOW,
+          DATA_STREAM_TYPE_DOC,
+          DATA_STREAM_GROUP,
+          ++order,
+          Width.SHORT,
+          DATA_STREAM_TYPE_DISPLAY,
+          new EnumRecommender<>(DataStreamType.class)
         ).define(
-            DATA_STREAM_TIMESTAMP_CONFIG,
-            Type.LIST,
-            DATA_STREAM_TIMESTAMP_DEFAULT,
-            Importance.LOW,
-            DATA_STREAM_TIMESTAMP_DOC,
-            DATA_STREAM_GROUP,
-            ++order,
-            Width.LONG,
-            DATA_STREAM_TIMESTAMP_DISPLAY
+          DATA_STREAM_TIMESTAMP_CONFIG,
+          Type.LIST,
+          DATA_STREAM_TIMESTAMP_DEFAULT,
+          Importance.LOW,
+          DATA_STREAM_TIMESTAMP_DOC,
+          DATA_STREAM_GROUP,
+          ++order,
+          Width.LONG,
+          DATA_STREAM_TIMESTAMP_DISPLAY
     );
   }
 
@@ -870,7 +870,8 @@ public class ElasticsearchSinkConnectorConfig extends AbstractConfig {
   }
 
   public boolean isDataStream() {
-    return dataStreamType() != DataStreamType.NONE && !dataStreamDataset().isEmpty();
+    return !Objects.equals(dataStreamType(), DataStreamType.NONE.name())
+            && !dataStreamDataset().isEmpty();
   }
 
   public boolean isProxyWithAuthenticationConfigured() {
@@ -946,8 +947,8 @@ public class ElasticsearchSinkConnectorConfig extends AbstractConfig {
     return getString(DATA_STREAM_DATASET_CONFIG);
   }
 
-  public DataStreamType dataStreamType() {
-    return DataStreamType.valueOf(getString(DATA_STREAM_TYPE_CONFIG).toUpperCase());
+  public String dataStreamType() {
+    return getString(DATA_STREAM_TYPE_CONFIG);
   }
 
   public List<String> dataStreamTimestampField() {
