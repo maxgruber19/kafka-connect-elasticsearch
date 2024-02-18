@@ -21,7 +21,6 @@ import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.concurrent.TimeUnit;
@@ -870,8 +869,7 @@ public class ElasticsearchSinkConnectorConfig extends AbstractConfig {
   }
 
   public boolean isDataStream() {
-    return !Objects.equals(dataStreamType(), DataStreamType.NONE.name())
-            && !dataStreamDataset().isEmpty();
+    return !dataStreamType().equals(DataStreamType.NONE.name()) && !dataStreamDataset().isEmpty();
   }
 
   public boolean isProxyWithAuthenticationConfigured() {
