@@ -821,37 +821,37 @@ public class ElasticsearchSinkConnectorConfig extends AbstractConfig {
     int order = 0;
     configDef
         .define(
-          DATA_STREAM_DATASET_CONFIG,
-          Type.STRING,
-          DATA_STREAM_DATASET_DEFAULT,
-          new DataStreamDatasetValidator(),
-          Importance.LOW,
-          DATA_STREAM_DATASET_DOC,
-          DATA_STREAM_GROUP,
-          ++order,
-          Width.MEDIUM,
-          DATA_STREAM_DATASET_DISPLAY
+            DATA_STREAM_DATASET_CONFIG,
+            Type.STRING,
+            DATA_STREAM_DATASET_DEFAULT,
+            new DataStreamDatasetValidator(),
+            Importance.LOW,
+            DATA_STREAM_DATASET_DOC,
+            DATA_STREAM_GROUP,
+            ++order,
+            Width.MEDIUM,
+            DATA_STREAM_DATASET_DISPLAY
         ).define(
-          DATA_STREAM_TYPE_CONFIG,
-          Type.STRING,
-          DATA_STREAM_TYPE_DEFAULT.name(),
-          Importance.LOW,
-          DATA_STREAM_TYPE_DOC,
-          DATA_STREAM_GROUP,
-          ++order,
-          Width.SHORT,
-          DATA_STREAM_TYPE_DISPLAY,
-          new EnumRecommender<>(DataStreamType.class)
+            DATA_STREAM_TYPE_CONFIG,
+            Type.STRING,
+            DATA_STREAM_TYPE_DEFAULT.name(),
+            Importance.LOW,
+            DATA_STREAM_TYPE_DOC,
+            DATA_STREAM_GROUP,
+            ++order,
+            Width.SHORT,
+            DATA_STREAM_TYPE_DISPLAY,
+            new EnumRecommender<>(DataStreamType.class)
         ).define(
-          DATA_STREAM_TIMESTAMP_CONFIG,
-          Type.LIST,
-          DATA_STREAM_TIMESTAMP_DEFAULT,
-          Importance.LOW,
-          DATA_STREAM_TIMESTAMP_DOC,
-          DATA_STREAM_GROUP,
-          ++order,
-          Width.LONG,
-          DATA_STREAM_TIMESTAMP_DISPLAY
+            DATA_STREAM_TIMESTAMP_CONFIG,
+            Type.LIST,
+            DATA_STREAM_TIMESTAMP_DEFAULT,
+            Importance.LOW,
+            DATA_STREAM_TIMESTAMP_DOC,
+            DATA_STREAM_GROUP,
+            ++order,
+            Width.LONG,
+            DATA_STREAM_TIMESTAMP_DISPLAY
     );
   }
 
